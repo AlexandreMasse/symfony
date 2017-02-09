@@ -1,0 +1,7 @@
+hello_the_world:
+    path:     /hello-world
+    defaults: { _controller: AlexPlatformBundle:Advert:index}
+
+test:
+    path: /test
+    defaults: { _controller: AlexPlatformBundle:Advert:test}
