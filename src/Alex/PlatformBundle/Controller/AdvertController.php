@@ -9,18 +9,21 @@ class AdvertController extends Controller
 {
     public function indexAction()
     {
+        //générer une url
+       $url = $this->generateUrl('alex_platform_view',array('id' => 5));
 
-        $content = $this->get('templating')->render('AlexPlatformBundle:Advert:index.html.twig', [
-            'nom' => 'alex'
-        ]);
+       $content = $this->get('templating')->render('AlexPlatformBundle:Advert:index.html.twig', [
+            'nom' => 'alex',
+            'url' => $url
+       ]);
 
-        return new Response($content);
-
+       return new Response($content);
 
     }
 
-    //test pour savoir si j'ai bien compris
-    public function testAction() {
-        return $this->render('AlexPlatformBundle:Advert:test.html.twig');
+
+    public function viewAction($id) {
+        return new Response("L'id est : " . $id);
     }
+
 }
