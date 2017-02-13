@@ -1,13 +1,24 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Formulaire d'ajout d'annonce</title>
-</head>
-<body>
+{% extends 'AlexPlatformBundle::layout.html.twig' %}
 
-</body>
-</html>
+{% block title %} Ajouter une annonce - {{ parent() }} {% endblock %}
+
+
+{% block body %}
+
+    <h2>Ajouter une annonce</h2>
+
+    {{ include('AlexPlatformBundle:Advert:form.html.twig') }}
+
+    <p>Cette annonce sera ajoutée après validation</p>
+
+    <p>
+        <a href="{{ path('alex_platform_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'accueil
+        </a>
+    </p>
+
+
+{% endblock %}
+
+

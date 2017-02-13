@@ -1,24 +1,22 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello World !</title>
-</head>
-<body>
+{% extends 'AlexPlatformBundle::layout.html.twig' %}
 
-    <h1>Hello World !</h1>
-    <h2>Je m'appelle {{ nom }} !</h2>
+{% block title %} Accueil - {{ parent() }} {% endblock %}
 
-    <p>
-        Le Hello World est un grand classique en programmation.
-        Il signifie énormément, car cela veut dire que vous avez
-        réussi à exécuter le programme pour accomplir une tâche simple :
-        afficher ce hello world !
-    </p>
 
-    <p>{{ url }}</p>
-</body>
-</html>
+{% block alexplatform_body %}
+
+    <h2>Liste des annonces</h2>
+
+    <ul>
+        {% for advert in listAdverts %}
+            <li>
+                <a href="{{ path('alex_platform_view', {'id': advert.id}) }}">{{ advert.title }}</a>
+                par {{ advert.author }} le {{ advert.date|date("d/m/Y") }}
+            </li>
+        {% else %}
+            <li>Pas d'annonce sur la plateforme  !</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+

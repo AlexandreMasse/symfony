@@ -1,13 +1,25 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edition de l'article n°{{ id }}</title>
-</head>
-<body>
+{% extends "AlexPlatformBundle::layout.html.twig" %}
 
-</body>
-</html>
+{% block title %}
+    Modifier une annonce - {{ parent() }}
+{% endblock %}
+
+{% block alexplatform_body %}
+
+    <h2>Modifier une annonce</h2>
+
+    {{ include("AlexPlatformBundle:Advert:form.html.twig") }}
+
+    <p>
+        Vous éditez une annonce déjà existante, merci de ne pas changer
+        l'esprit général de l'annonce déjà publiée.
+    </p>
+
+    <p>
+        <a href="{{ path('alex_platform_view', {'id': advert.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'annonce
+        </a>
+    </p>
+
+{% endblock %}
