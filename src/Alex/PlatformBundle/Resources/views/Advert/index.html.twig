@@ -2,7 +2,6 @@
 
 {% block title %} Accueil - {{ parent() }} {% endblock %}
 
-
 {% block alexplatform_body %}
 
     <h2>Liste des annonces</h2>
@@ -11,12 +10,15 @@
         {% for advert in listAdverts %}
             <li>
                 <a href="{{ path('alex_platform_view', {'id': advert.id}) }}">{{ advert.title }}</a>
-                par {{ advert.author }} le {{ advert.date|date("d/m/Y") }}
+                par {{ advert.author }}
+                le {{ advert.date|date("d/m/Y") }}
             </li>
         {% else %}
-            <li>Pas d'annonce sur la plateforme  !</li>
+            <li>Pas d'annonce sur la plateforme pour le moment !</li>
         {% endfor %}
     </ul>
 
 {% endblock %}
+
+
 

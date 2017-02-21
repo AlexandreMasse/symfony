@@ -1,11 +1,13 @@
-alex_platform_home:
-    path: /{page}
+#Route de la page d'accueil
+alex_platform_home: #Nom de la route
+    path: /{page} #URL de la route, ici "page" est une variable
     defaults:
-        _controller: AlexPlatformBundle:Advert:index
-        page: 1
+        _controller: AlexPlatformBundle:Advert:index #Contrôleur à exécuter
+        page: 1 #Par défaut la variable page vaut 1
     requirements:
-        page: \d*
+        page: \d* #la variable page doit etre un nombre entier
 
+#Route de la page d'une annonce
 alex_platform_view:
     path: /advert/{id}
     defaults:
@@ -13,11 +15,13 @@ alex_platform_view:
     requirements:
         id: \d+
 
+#Route vers la page d'ajout d'une nouvelle annonce
 alex_platform_add:
     path: /add
     defaults:
         _controller: AlexPlatformBundle:Advert:add
 
+#Route vers la page de modification d'une annonce
 alex_platform_edit:
     path: /edit/{id}
     defaults:
@@ -25,9 +29,13 @@ alex_platform_edit:
     requirements:
         id: \d+
 
+#Route vers la page de suppression d'une annonce
 alex_platform_delete:
     path: /delete/{id}
     defaults:
         _controller: AlexPlatformBundle:Advert:delete
     requirements:
         id: \d+
+
+
+

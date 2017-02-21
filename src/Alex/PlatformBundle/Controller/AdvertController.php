@@ -4,40 +4,37 @@ namespace Alex\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdvertController extends Controller
 {
-
-
+    //Fonction pour la page d'acceuil
     public function indexAction($page)
     {
-
+        //Retoune une erreur si le numero de page dans l'URL est inférieur à 1
         if ($page < 1) {
             throw new NotFoundHttpException('La page "' . $page . '" est inexistante !');
         }
 
-
-        // Notre liste d'annonce en dur
+        // Notre liste d'annonce "en dur"
         $listAdverts = array(
             array(
                 'title'   => 'Recherche développpeur Symfony',
                 'id'      => 1,
                 'author'  => 'Alexandre',
-                'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+                'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon...',
                 'date'    => new \Datetime()),
             array(
                 'title'   => 'Mission de webmaster',
                 'id'      => 2,
                 'author'  => 'Hugo',
-                'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
+                'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet...',
                 'date'    => new \Datetime()),
             array(
                 'title'   => 'Offre de stage webdesigner',
                 'id'      => 3,
                 'author'  => 'Mathieu',
-                'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
+                'content' => 'Nous proposons un poste pour webdesigner...',
                 'date'    => new \Datetime())
         );
 
@@ -49,7 +46,7 @@ class AdvertController extends Controller
     }
 
 
-
+    //Fonction pour l'affichage de la page d'une annonce
     public function viewAction($id)
     {
         //annonce en dur
@@ -60,7 +57,6 @@ class AdvertController extends Controller
             'content' => 'Nous recherchons un développeur Symfony3 débutant sur Lyon. Blabla…',
             'date'    => new \Datetime()
         );
-
 
         return $this->render('AlexPlatformBundle:Advert:view.html.twig', [
             'advert' => $advert
