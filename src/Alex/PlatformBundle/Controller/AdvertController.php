@@ -2,6 +2,7 @@
 
 namespace Alex\PlatformBundle\Controller;
 
+use Alex\PlatformBundle\Entity\Advert;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -49,6 +50,7 @@ class AdvertController extends Controller
     //Fonction pour l'affichage de la page d'une annonce
     public function viewAction($id)
     {
+        /*
         //annonce en dur
         $advert = array(
             'title'   => 'Recherche développpeur Symfony3',
@@ -57,7 +59,23 @@ class AdvertController extends Controller
             'content' => 'Nous recherchons un développeur Symfony3 débutant sur Lyon. Blabla…',
             'date'    => new \Datetime()
         );
+        */
 
+        // On récupère le repository
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AlexPlatformBundle:Advert')
+        ;
+
+        // On récupère l'entité correspondante à l'id $id
+        $advert = $repository->find($id);
+
+        // $advert est donc une instance de Alex\PlatformBundle\Entity\Advert ou null si l'id $id  n'existe pas, d'où ce if :
+        if (null === $advert) {
+            throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+        }
+
+        
         return $this->render('AlexPlatformBundle:Advert:view.html.twig', [
             'advert' => $advert
         ]);
@@ -66,13 +84,32 @@ class AdvertController extends Controller
 
     public function addAction(Request $request)
     {
+        // Création de l'entité
+        $advert = new Advert();
+        $advert->setTitle('Recherche développeur Symfony.');
+        $advert->setAuthor('Alexandre');
+        $advert->setContent("Nous recherchons un développeur Symfony expert en la matière sur Paris....");
+
+        // On peut ne pas définir ni la date ni la publication, car ces attributs sont définis automatiquement dans le constructeur
+
+        // On récupère l'EntityManager
+        $em = $this->getDoctrine()->getManager();
+
+        // Étape 1 : On « persiste » l'entité
+        $em->persist($advert);
+
+        // Étape 2 : On « flush » tout ce qui a été persisté avant
+        $em->flush();
+
+
         //verifie si la methode est POST
         if ($request->isMethod('POST')) {
 
             $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée');
 
+            // Puis on redirige vers la page de visualisation de cettte annonce
             return $this->redirectToRoute('alex_platform_view', [
-                'id' => 5
+                'id' => $advert->getId()
             ]);
         }
 
